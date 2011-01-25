@@ -1,0 +1,15 @@
+
+Note: you can specify options to tasks either on the command line or in a config file
+
+fab "install,virtualenv=testing,port=8881"
+
+fab -Cconfig.txt install
+
+= Releases =
+
+To update the module, do:
+
+hg -q id -n
+
+Then update the REVISION variable near the top with the output
+

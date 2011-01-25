@@ -1,0 +1,11 @@
+html5lib
+httplib2
+python-dateutil
+simplejson
+feedparser
+xlrd
+
+hg+http://foundry.zepheira.com/hg/zenpub/#egg=zen
+https://github.com/zepheira/akara/tarball/master
+https://github.com/zepheira/amara/tarball/master
+

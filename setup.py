@@ -35,14 +35,14 @@ class build_version(build):
 
 
 setup(
-    name = "akara-freemix",
+    name = "freemix-akara",
     version = VERSION,
     description = "Akara modules for Freemix",
     keywords = "freemix akara",
     license = "License :: OSI Approved :: Apache Software License",
     author = "Uche Ogbuji",
     author_email = "uche@zepheira.com",
-    url = "https://github.com/zepheira/akara-freemix",
+    url = "https://github.com/zepheira/freemix-akara",
     packages = find_packages(),
     include_package_data=True,
     cmdclass = {'sdist': sdist_version, 'build': build_version}

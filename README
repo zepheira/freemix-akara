@@ -1,15 +1,29 @@
+freemix-akara
+=============
+This library provides the following Akara modules  for Freemix data transformation and augmentation
 
-Note: you can specify options to tasks either on the command line or in a config file
+ * freemix_akara.load_data
+ * freemix_akara.augment_data
+ * freemix_akara.contentdm
 
-fab "install,virtualenv=testing,port=8881"
+Installation
+------------
+To install all requirements, run the following commands from the root of the source tree
+ $ pip install -r requirements.txt
+ $ python setup.py install
 
-fab -Cconfig.txt install
+Edit etc/akara.conf to modify the ServerRoot and host/port if necessary
 
-= Releases =
+Alternatively, Akara provides a fabric[1] script for secure installation to a remote ubuntu host[2].
 
-To update the module, do:
+Testing
+-------
+To run the nose[3] test suite, run the following commands:
+ $ pip install nose
+ $ nosetests
 
-hg -q id -n
 
-Then update the REVISION variable near the top with the output
 
+[1]: http://fabfile.org
+[2]: https://github.com/zepheira/akara/tree/master/etc/fabric
+[3]: http://pypi.python.org/pypi/nose/

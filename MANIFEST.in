@@ -1,0 +1,4 @@
+include setup.py README MANIFEST.in
+graft test
+
+exclude test/*.pyc

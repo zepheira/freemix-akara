@@ -5,6 +5,6 @@ simplejson
 feedparser
 xlrd
 
-hg+http://foundry.zepheira.com/hg/zenpub/#egg=zen
+zenlib
 akara
 amara

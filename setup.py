@@ -1,12 +1,11 @@
 """
 Setup for the Django Redmine app.
 """
-from setuptools import setup, find_packages
-
 package_name="freemix_akara"
 
 VERSION = __import__(package_name).__version__
 
+from distutils.core import setup
 from distutils.command.sdist import sdist
 from distutils.command.build import build
 import os
@@ -43,7 +42,10 @@ setup(
     author = "Uche Ogbuji",
     author_email = "uche@zepheira.com",
     url = "https://github.com/zepheira/freemix-akara",
-    packages = find_packages(),
+    #Itching to rename freemix_akara to lib, but resisting that itch for the moment ;)
+    package_dir={'freemix_akara': 'freemix_akara'
+                    },
+    packages = ['freemix_akara'],
     include_package_data=True,
     cmdclass = {'sdist': sdist_version, 'build': build_version}
 )

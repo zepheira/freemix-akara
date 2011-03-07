@@ -53,5 +53,201 @@ def contentdm(collection='all', query=None, site=DEFAULT_SITE, limit=None):
     count = 0
     logger.debug("Start URL: " + repr(url))
     entries = list(results)
-    return json.dumps({'items': entries}, indent=4)
+    return json.dumps({'items': entries, 'data_profile': PROFILE}, indent=4)
 
+PROFILE = {
+    #"original_MIME_type": "application/vnd.ms-excel", 
+    #"Akara_MIME_type_magic_guess": "application/vnd.ms-excel", 
+    #"url": "/data/uche/amculturetest/data.json", 
+    #"label": "amculturetest", 
+    "properties": [
+        {
+            "property": "Object_Type", 
+            "enabled": True, 
+            "label": "Object type", 
+            "types": [
+                "text"
+            ], 
+            "tags": []
+        }, 
+        {
+            "property": "Source", 
+            "enabled": True, 
+            "label": "Source", 
+            "types": [
+                "text"
+            ], 
+            "tags": [
+            ]
+        }, 
+        {
+            "property": "id", 
+            "enabled": False, 
+            "label": "id", 
+            "types": [
+                "text"
+            ], 
+            "tags": [
+                "property:type=url"
+            ]
+        }, 
+        {
+            "property": "link", 
+            "enabled": True, 
+            "label": "link", 
+            "types": [
+                "text"
+            ], 
+            "tags": [
+                "property:type=url"
+            ]
+        }, 
+        {
+            "property": "Collection", 
+            "enabled": True, 
+            "label": "Collection", 
+            "types": [
+                "text"
+            ], 
+            "tags": [
+            ]
+        }, 
+        {
+            "property": "Digital_Publisher", 
+            "enabled": True, 
+            "label": "Digital publisher", 
+            "types": [
+                "text"
+            ], 
+            "tags": []
+        }, 
+        {
+            "property": "Description", 
+            "enabled": True, 
+            "label": "Description", 
+            "types": [
+                "text"
+            ], 
+            "tags": []
+        }, 
+        {
+            "property": "label", 
+            "enabled": False, 
+            "label": "label", 
+            "types": [
+                "text"
+            ], 
+            "tags": []
+        }, 
+        {
+            "property": "Format", 
+            "enabled": True, 
+            "label": "Format", 
+            "types": [
+                "text"
+            ], 
+            "tags": []
+        }, 
+        {
+            "property": "Estimated_Original_Date", 
+            "enabled": True, 
+            "label": "Estimated original date", 
+            "types": [
+                "text"
+            ], 
+            "tags": []
+        }, 
+        {
+            "property": "Date_Original", 
+            "enabled": True, 
+            "label": "Original date", 
+            "types": [
+                "text"
+            ], 
+            "tags": []
+        }, 
+        {
+            "property": "thumbnail", 
+            "enabled": True, 
+            "label": "thumbnail", 
+            "types": [
+                "text"
+            ], 
+            "tags": [
+                "property:type=image"
+            ]
+        }, 
+        {
+            "property": "imageuri", 
+            "enabled": True, 
+            "label": "imageuri", 
+            "types": [
+                "text"
+            ], 
+            "tags": [
+                "property:type=image"
+            ]
+        }, 
+        {
+            "property": "tags", 
+            "enabled": True, 
+            "label": "tags", 
+            "types": [
+                "text"
+            ], 
+            "tags": [
+                "property:type=list"
+            ]
+        }, 
+        {
+            "property": "Locations_Depicted", 
+            "enabled": True, 
+            "label": "Depicted locations", 
+            "types": [
+                "text"
+            ], 
+            "tags": [
+                "property:type=list"
+            ]
+        }, 
+        {
+            "property": "Creator", 
+            "enabled": True, 
+            "label": "Creator", 
+            "types": [
+                "text"
+            ], 
+            "tags": []
+        }, 
+        {
+            "property": "Image_Number", 
+            "enabled": True, 
+            "label": "Image number", 
+            "types": [
+                "text"
+            ], 
+            "tags": []
+        }, 
+        {
+            "property": "Collection_Website", 
+            "enabled": True, 
+            "label": "Collection website", 
+            "types": [
+                "text"
+            ], 
+            "tags": [
+                "property:type=url"
+            ]
+        }, 
+        {
+            "property": "Citation_Information", 
+            "enabled": True, 
+            "label": "Citation information", 
+            "types": [
+                "text"
+            ], 
+            "tags": []
+        }, 
+    ], 
+    #"Akara_MIME_type_guess": "application/vnd.ms-excel"
+}

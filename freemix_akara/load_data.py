@@ -21,29 +21,27 @@ from itertools import *
 from operator import *
 from contextlib import closing
 
-import httplib2
-
 import amara
 from amara import bindery
 from amara.lib import U
 from amara.lib.xmlstring import isxml
 from amara.tools.atomtools import ejsonize as atomparse
 from amara.tools.atomtools import ATOM_IMT
+from amara.thirdparty import json, httplib2
 
 from akara.services import simple_service
 from akara import logger
 from akara import module_config
 from akara import response
 from akara.caching import cache, make_named_cache
-from amara.thirdparty import json
 
-from zenlib import spreadsheet as spreadsheetlib
-from zenlib.temporal import smart_parse_date
-from zenlib.csvhelper import readcsv
-from zenlib.mods import mods2json#, MODS_NAMESPACE
-from zenlib.geo import geolookup
-from zenlib.whatfile import guess_imt
-from zenlib.feeds import webfeed
+from zen import spreadsheet as spreadsheetlib
+from zen.temporal import smart_parse_date
+from zen.csvhelper import readcsv
+from zen.mods import mods2json#, MODS_NAMESPACE
+from zen.geo import geolookup
+from zen.whatfile import guess_imt
+from zen.feeds import webfeed
 
 from . import __version__ as VERSION
 

@@ -10,17 +10,15 @@ from itertools import *
 from operator import *
 from contextlib import closing
 
-import httplib2
-
-from amara.thirdparty import json
+from amara.thirdparty import json, httplib2
 
 from akara.services import simple_service
 from akara import logger
 from akara import response
 from akara.caching import cache, make_named_cache
 
-from zenlib import service_proxy
-from zenlib import augmentation
+from zen.services import service_proxy
+from zen import augmentation
 
 
 CHUNKCOUNT = 10
@@ -36,7 +34,6 @@ def post(body, sink):
     h = httplib2.Http()
     resp, content = h.request(sink, "POST", body=body, headers=headers)
     return resp, content
-
 
 
 AUGMENTATIONS = {

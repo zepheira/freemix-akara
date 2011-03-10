@@ -191,23 +191,17 @@ PROFILE = {
         {
             "property": "tags", 
             "enabled": True, 
-            "label": "tags", 
-            "types": [
-                "text"
-            ], 
+            "label": "tags",
             "tags": [
-                "property:type=list"
+                "property:type=text", "property:type=shredded_list"
             ]
-        }, 
+        },
         {
             "property": "Locations_Depicted", 
             "enabled": True, 
             "label": "Depicted locations", 
-            "types": [
-                "text"
-            ], 
             "tags": [
-                "property:type=list"
+                "property:type=text", "property:type=shredded_list"
             ]
         }, 
         {

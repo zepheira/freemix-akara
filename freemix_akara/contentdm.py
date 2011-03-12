@@ -8,7 +8,6 @@ python contentdm_adapter.py http://digital.library.louisville.edu/cdm4/ "crutche
 '''
 
 import sys, time
-#import datetime
 
 import amara
 from amara import bindery
@@ -26,6 +25,11 @@ from akara import module_config
 from zen.geo import geolookup
 from zen.contentdm import read_contentdm
 
+try:
+    import objgraph #http://mg.pov.lt/objgraph/
+    def checkmem(): objgraph.show_most_common_types(limit=5)
+except ImportError:
+    def checkmem(): pass
 
 DEFAULT_SITE = 'http://digital.library.louisville.edu/cdm4/'
 SERVICE_ID = 'http://purl.org/com/zepheira/freemix/services/contentdm.json'
@@ -35,24 +39,26 @@ def contentdm(collection='all', query=None, site=DEFAULT_SITE, limit=None):
     '''
     Search all collections in Louisville:
 
-    curl "http://localhost:8880/contentdm.json?query=crutches&site=http://digital.library.louisville.edu/cdm4/"
+    curl "http://localhost:8880/contentdm.json?query=crutches&site=http://digital.library.louisville.edu/cdm4/&limit=100"
 
     Search just /jthom collection in Louisville:
 
-    curl "http://localhost:8880/contentdm.json?collection=/jthom&query=crutches&site=http://digital.library.louisville.edu/cdm4/"
+    curl "http://localhost:8880/contentdm.json?collection=/jthom&query=crutches&site=http://digital.library.louisville.edu/cdm4/&limit=100"
 
     Search all collections in U Miami:
 
-    curl "http://localhost:8880/contentdm.json?collection=/jthom&query=crutches&site=http://doyle.lib.muohio.edu/cdm4/"
-
-    curl "http://localhost:8880/contentdm.json?collection=/jthom&site=http://digital.library.louisville.edu/cdm4/&sink=http://localhost:8880/testsink.json"
+    curl "http://localhost:8880/contentdm.json?query=crutches&site=http://doyle.lib.muohio.edu/cdm4/&limit=100"
     '''
-    results = read_contentdm(site, collection=collection, query=query, limit=limit)
+    limit = int(limit) if limit else None
+    results = read_contentdm(site, collection=collection, query=query, limit=limit, logger=logger)
     header = results.next()
     url = header['basequeryurl']
     count = 0
     logger.debug("Start URL: " + repr(url))
+    logger.debug("Limit: {0}".format(limit))
     entries = list(results)
+    logger.debug("Result count: {0}".format(len(entries)))
+    #checkmem()
     return json.dumps({'items': entries, 'data_profile': PROFILE}, indent=4)
 
 PROFILE = {

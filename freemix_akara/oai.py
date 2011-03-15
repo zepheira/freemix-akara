@@ -1,12 +1,5 @@
 '''
 Requires the Zen library.
-
-( http://www.contentdm.com/ )
-
-python contentdm_adapter.py http://digital.library.louisville.edu/cdm4/ "crutches"
-
- * http://digital.library.louisville.edu/collections/jthom/
- * http://digital.library.louisville.edu/cdm4/search.php
 '''
 
 import sys, time
@@ -19,20 +12,53 @@ from akara import module_config
 
 from zen.oai import oaiservice
 
-SERVICE_ID = 'http://purl.org/com/zepheira/freemix/services/oai/listsets'
+LISTSETS_SERVICE_ID = 'http://purl.org/com/zepheira/freemix/services/oai/listsets'
 
-@simple_service('GET', SERVICE_ID, 'oai.listsets.json', 'application/json')
-def oai(endpoint='http://dspace.mit.edu/oai/request', limit=100):
+@simple_service('GET', LISTSETS_SERVICE_ID, 'oai.listsets.json', 'application/json')
+def listsets(endpoint='http://dspace.mit.edu/oai/request', limit=100):
     """
+    e.g.:
+
+    curl "http://localhost:8880/oai.listsets.json?limit=10"
     """
     limit = int(limit)
     remote = oaiservice(endpoint, logger)
     sets = remote.list_sets()[:limit]
-    #logger.debug("Start URL: " + repr(url))
-    #logger.debug("Limit: {0}".format(limit))
     return json.dumps(sets, indent=4)
 
 
+LISTRECORDS_SERVICE_ID = 'http://purl.org/com/zepheira/freemix/services/oai/listrecords'
+
+@simple_service('GET', LISTRECORDS_SERVICE_ID, 'oai.listrecords.json', 'application/json')
+def listrecords(endpoint='http://dspace.mit.edu/oai/request', oaiset=None, limit=100):
+    """
+    e.g.:
+
+    curl "http://localhost:8880/oai.listrecords.json?oaiset=hdl_1721.1_18193&limit=10"
+    """
+    limit = int(limit)
+    if not oaiset:
+        raise ValueError('OAI set required')
+
+    remote = oaiservice(endpoint, logger)
+    records = remote.list_records(oaiset)[:limit]
+    exhibit_records = []
+    for rid, rinfo in records:
+        erecord = {u'id': rid}
+        for k, v in rinfo.iteritems():
+            if len(v) == 1:
+                erecord[k] = v[0]
+            else:
+                erecord[k] = v
+            if u'title' in erecord:
+                erecord[u'label'] = erecord[u'title']
+            exhibit_records.append(erecord)
+            
+    #FIXME: This profile is NOT correct.  Dumb copy from CDM endpoint.  Please fix up below
+    return json.dumps({'items': exhibit_records, 'data_profile': PROFILE}, indent=4)
+
+
+#FIXME: This profile is NOT correct.  Dumb copy from CDM endpoint.
 PROFILE = {
     #"original_MIME_type": "application/vnd.ms-excel", 
     #"Akara_MIME_type_magic_guess": "application/vnd.ms-excel", 

@@ -5,6 +5,6 @@ simplejson
 feedparser
 xlrd
 
-zenlib
+zen
 akara
 amara

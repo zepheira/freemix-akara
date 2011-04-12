@@ -23,6 +23,7 @@ from amara.lib.util import first_item
 from akara.services import simple_service
 from akara import logger
 from akara import module_config
+from akara.util import find_peer_service
 
 from zen.geo import geolookup
 from zen.contentdm import read_contentdm
@@ -35,6 +36,11 @@ except ImportError:
 
 DEFAULT_SITE = 'http://digital.library.louisville.edu/cdm4/'
 SERVICE_ID = 'http://purl.org/com/zepheira/freemix/services/contentdm.json'
+
+CACHE_PROXY_SERVICE_ID = 'http://purl.org/xml3k/akara/services/demo/cache-proxy'
+
+#CDM sites don't provide HTTP cache headers, so if there is a local proxy service to add those, use it
+CACHE_PROXY_SERVICE = find_peer_service(CACHE_PROXY_SERVICE_ID)
 
 @simple_service('GET', SERVICE_ID, 'contentdm.json', 'application/json')
 def contentdm(collection='all', query=None, site=DEFAULT_SITE, limit=None):
@@ -52,12 +58,11 @@ def contentdm(collection='all', query=None, site=DEFAULT_SITE, limit=None):
     curl "http://localhost:8880/contentdm.json?query=crutches&site=http://doyle.lib.muohio.edu/cdm4/&limit=100"
     '''
     limit = int(limit) if limit else None
-    results = read_contentdm(site, collection=collection, query=query, limit=limit, logger=logger)
+    results = read_contentdm(site, collection=collection, query=query, limit=limit, logger=logger, proxy=CACHE_PROXY_SERVICE)
     header = results.next()
     url = header['basequeryurl']
     count = 0
-    logger.debug("Start URL: " + repr(url))
-    logger.debug("Limit: {0}".format(limit))
+    logger.debug("Start URL: {0}, Limit: {1}".format(repr(url), limit))
     entries = list(results)
     logger.debug("Result count: {0}".format(len(entries)))
     #checkmem()

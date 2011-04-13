@@ -66,22 +66,45 @@ PROFILE = {
     #"label": "amculturetest", 
     "properties": [
         {
-            "property": "Object_Type", 
+            "property": "handle", 
             "enabled": True, 
-            "label": "Object type", 
-            "types": [
-                "text"
-            ], 
-            "tags": []
+            "label": "Handle", 
+            "tags": [
+                "property:type=text", "property:type=shredded_list"
+            ]
         }, 
         {
-            "property": "Source", 
+            "property": "language", 
             "enabled": True, 
-            "label": "Source", 
+            "label": "Language", 
             "types": [
                 "text"
             ], 
             "tags": [
+            ]
+        }, 
+        {
+            "property": "creator", 
+            "enabled": True, 
+            "label": "Creators", 
+            "tags": [
+                "property:type=text", "property:type=shredded_list"
+            ]
+        }, 
+        {
+            "property": "format", 
+            "enabled": True, 
+            "label": "Formats", 
+            "tags": [
+                "property:type=text", "property:type=shredded_list"
+            ]
+        }, 
+        {
+            "property": "relation", 
+            "Enabled": True, 
+            "label": "Relations", 
+            "tags": [
+                "property:type=text", "property:type=shredded_list"
             ]
         }, 
         {
@@ -96,39 +119,26 @@ PROFILE = {
             ]
         }, 
         {
-            "property": "link", 
+            "property": "date", 
             "enabled": True, 
-            "label": "link", 
-            "types": [
-                "text"
-            ], 
+            "label": "Date", 
             "tags": [
-                "property:type=url"
+                "property:type=datetime", "property:type=shredded_list"
             ]
         }, 
         {
-            "property": "Collection", 
+            "property": "datestamp", 
             "enabled": True, 
-            "label": "Collection", 
+            "label": "Date stamp", 
             "types": [
-                "text"
-            ], 
-            "tags": [
-            ]
-        }, 
-        {
-            "property": "Digital_Publisher", 
-            "enabled": True, 
-            "label": "Digital publisher", 
-            "types": [
-                "text"
+                "datetime"
             ], 
             "tags": []
         }, 
         {
-            "property": "Description", 
+            "property": "title", 
             "enabled": True, 
-            "label": "Description", 
+            "label": "Title", 
             "types": [
                 "text"
             ], 
@@ -136,111 +146,17 @@ PROFILE = {
         }, 
         {
             "property": "label", 
-            "enabled": False, 
-            "label": "label", 
+            "enabled": True, 
+            "label": "Label", 
             "types": [
                 "text"
             ], 
             "tags": []
         }, 
         {
-            "property": "Format", 
+            "property": "type", 
             "enabled": True, 
-            "label": "Format", 
-            "types": [
-                "text"
-            ], 
-            "tags": []
-        }, 
-        {
-            "property": "Estimated_Original_Date", 
-            "enabled": True, 
-            "label": "Estimated original date", 
-            "types": [
-                "text"
-            ], 
-            "tags": []
-        }, 
-        {
-            "property": "Date_Original", 
-            "enabled": True, 
-            "label": "Original date", 
-            "types": [
-                "text"
-            ], 
-            "tags": []
-        }, 
-        {
-            "property": "thumbnail", 
-            "enabled": True, 
-            "label": "thumbnail", 
-            "types": [
-                "text"
-            ], 
-            "tags": [
-                "property:type=image"
-            ]
-        }, 
-        {
-            "property": "imageuri", 
-            "enabled": True, 
-            "label": "imageuri", 
-            "types": [
-                "text"
-            ], 
-            "tags": [
-                "property:type=image"
-            ]
-        }, 
-        {
-            "property": "tags", 
-            "enabled": True, 
-            "label": "tags",
-            "tags": [
-                "property:type=text", "property:type=shredded_list"
-            ]
-        },
-        {
-            "property": "Locations_Depicted", 
-            "enabled": True, 
-            "label": "Depicted locations", 
-            "tags": [
-                "property:type=text", "property:type=shredded_list"
-            ]
-        }, 
-        {
-            "property": "Creator", 
-            "enabled": True, 
-            "label": "Creator", 
-            "types": [
-                "text"
-            ], 
-            "tags": []
-        }, 
-        {
-            "property": "Image_Number", 
-            "enabled": True, 
-            "label": "Image number", 
-            "types": [
-                "text"
-            ], 
-            "tags": []
-        }, 
-        {
-            "property": "Collection_Website", 
-            "enabled": True, 
-            "label": "Collection website", 
-            "types": [
-                "text"
-            ], 
-            "tags": [
-                "property:type=url"
-            ]
-        }, 
-        {
-            "property": "Citation_Information", 
-            "enabled": True, 
-            "label": "Citation information", 
+            "label": "Document Type", 
             "types": [
                 "text"
             ], 

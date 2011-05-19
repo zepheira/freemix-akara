@@ -1,5 +1,30 @@
+# -*- encoding: utf-8 -*-
 '''
-Requires the Zen library.
+@ 2011 by Uche ogbuji <uche@ogbuji.net>
+
+This file is part of the open source Akara project,
+provided under the Apache 2.0 license.
+See the files LICENSE and NOTICE for details.
+Project home, documentation, distributions: http://wiki.xml3k.org/Akara
+
+ Module name:: freemix_akara.oai
+
+Scrapes collections from a OAI site into JSON form for Freemix
+
+= Defined REST entry points =
+
+http://purl.org/com/zepheira/freemix/services/oai.json (freemix_akara.oai) Handles GET
+
+= Configuration =
+
+None
+
+= Notes on security =
+
+This makes heavy access to remote OAI sites
+
+= Notes =
+
 '''
 
 import sys, time

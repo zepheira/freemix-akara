@@ -1,5 +1,29 @@
+# -*- encoding: utf-8 -*-
 '''
-Requires the Zen library.
+@ 2011 by Uche ogbuji <uche@ogbuji.net>
+
+This file is part of the open source Akara project,
+provided under the Apache 2.0 license.
+See the files LICENSE and NOTICE for details.
+Project home, documentation, distributions: http://wiki.xml3k.org/Akara
+
+ Module name:: freemix_akara.contentdm
+
+Scrapes collections from a CDM site into JSON form for Freemix
+
+= Defined REST entry points =
+
+http://purl.org/com/zepheira/freemix/services/contentdm.json (freemix_akara.contentdm) Handles GET
+
+= Configuration =
+
+None
+
+= Notes on security =
+
+This makes heavy access to remote CDM sites
+
+= Notes =
 
 ( http://www.contentdm.com/ )
 
@@ -7,6 +31,7 @@ python contentdm_adapter.py http://digital.library.louisville.edu/cdm4/ "crutche
 
  * http://digital.library.louisville.edu/collections/jthom/
  * http://digital.library.louisville.edu/cdm4/search.php
+
 '''
 
 import sys, time

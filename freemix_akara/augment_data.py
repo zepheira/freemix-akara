@@ -1,7 +1,32 @@
 #!/usr/bin/env python
 # encoding: utf-8
 """
-Copyright 2008-2010 Zepheira LLC
+Copyright 2008-2011 Zepheira LLC
+
+Services for data augmentation
+
+This file is part of the open source Freemix project,
+provided under the Apache 2.0 license.
+See the files LICENSE and NOTICE for details.
+Project home, documentation, distributions: http://foundry.zepheira.com/projects/zen
+
+= Defined REST entry points =
+
+
+= Configuration =
+
+
+Sample config:
+
+class augment_data:
+    geonames_dbfile = 'path/to/geonames.sqlite3'
+    #e.g.: geonames_dbfile = Akara.ConfigRoot+'/caches/geonames.sqlite3'
+
+= Notes on security =
+
+To-do
+
+
 """
 
 import sys, re, os, time
@@ -19,7 +44,10 @@ from akara.caching import cache, make_named_cache
 
 from zen.services import service_proxy
 from zen import augmentation
+from zen.geo import local_geonames, US_STATE_FIRST
 
+
+GEONAMES_PLUS_DBFILE = module_config().get('geonames_dbfile')
 
 CHUNKCOUNT = 10
 
@@ -43,6 +71,7 @@ AUGMENTATIONS = {
     u'shredded_list': u'http://purl.org/com/zepheira/augmentation/shredded-list',
 }
 
+augmentation.GEOCODER = local_geonames(GEONAMES_PLUS_DBFILE, heuristics=[US_STATE_FIRST])
 
 PROP_TYPE_MARKER = "property:type="
 PROP_TYPE_MARKER_LEN = len("property:type=")

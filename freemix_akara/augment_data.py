@@ -41,6 +41,7 @@ from akara.services import simple_service
 from akara import logger
 from akara import response
 from akara.caching import cache, make_named_cache
+from akara import module_config
 
 from zen.services import service_proxy
 from zen import augmentation

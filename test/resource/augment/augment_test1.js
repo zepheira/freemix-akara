@@ -1,4 +1,5 @@
 {
+    "__comment": "e.g.: curl --request POST --data-binary @- htp://transformer.zepheira.com:8883/augment.freemix.json < ~/dev/zepheira/freemix-akara/test/resource/augment/augment_test1.js",
     "items": [
         {
             "id": "_1",
@@ -45,6 +46,19 @@
             "end": "1910",
             "Name": "Old stuff",
             "comment": "YYYY date augmentations"
+        },
+        {
+            "id": "_5",
+            "label": "_5",
+            "street_address": "739 University Blvd",
+            "city": "Tuscaloosa",
+            "state": "Alabama",
+            "zip": "35487",
+            "placename": "Alabama",
+            "start": "1900",
+            "end": "2011",
+            "Name": "The University of Alabama",
+            "comment": "To test single placename geo augmentation"
         }
     ],
     "data_profile": {
@@ -110,6 +124,15 @@
                 "city",
                 "state",
                 "zip"
+            ]
+        },
+        {
+            "property": "where3",
+            "enabled": true,
+            "label": "Where3",
+            "tags": ["property:type=location"],
+            "composite": [
+                "placename"
             ]
         },
         {

@@ -72,7 +72,7 @@ AUGMENTATIONS = {
     u'shredded_list': u'http://purl.org/com/zepheira/augmentation/shredded-list',
 }
 
-augmentation.GEOCODER = local_geonames(GEONAMES_PLUS_DBFILE, heuristics=[US_STATE_FIRST])
+augmentation.GEOCODER = local_geonames(GEONAMES_PLUS_DBFILE, heuristics=[US_STATE_FIRST], logger=logger)
 
 PROP_TYPE_MARKER = "property:type="
 PROP_TYPE_MARKER_LEN = len("property:type=")

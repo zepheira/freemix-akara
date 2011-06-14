@@ -46,6 +46,6 @@ setup(
     package_dir={'freemix_akara': 'freemix_akara'
                     },
     packages = ['freemix_akara'],
-    include_package_data=True,
+    #include_package_data=True,
     cmdclass = {'sdist': sdist_version, 'build': build_version}
 )

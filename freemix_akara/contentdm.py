@@ -52,6 +52,7 @@ from akara.util import find_peer_service
 
 from zen.geo import geolookup
 from zen.contentdm import read_contentdm
+from zen.exhibit import profile_properties
 
 try:
     import objgraph #http://mg.pov.lt/objgraph/
@@ -90,11 +91,16 @@ def contentdm(collection='all', query=None, site=DEFAULT_SITE, limit=None):
     logger.debug("Start URL: {0}, Limit: {1}".format(repr(url), limit))
     entries = list(results)
     logger.debug("Result count: {0}".format(len(entries)))
+    properties = profile_properties(entries)
+    logger.debug("DEFAULT_PROPERTIES: {0}".format(DEFAULT_PROPERTIES))
+    for prop in properties:
+        if prop[u"property"] in DEFAULT_PROPERTIES:
+            prop[u"tags"] = DEFAULT_PROPERTIES[prop[u"property"]][u"tags"]
     #checkmem()
-    return json.dumps({'items': entries, 'data_profile': PROFILE}, indent=4)
+    return json.dumps({'items': entries, 'data_profile': {"properties": properties}}, indent=4)
 
 
-PROFILE = {
+DEFAULT_PROFILE = {
     #"original_MIME_type": "application/vnd.ms-excel", 
     #"Akara_MIME_type_magic_guess": "application/vnd.ms-excel", 
     #"url": "/data/uche/amculturetest/data.json", 
@@ -284,3 +290,5 @@ PROFILE = {
     ], 
     #"Akara_MIME_type_guess": "application/vnd.ms-excel"
 }
+
+DEFAULT_PROPERTIES = dict([ (prop[u"property"], prop) for prop in DEFAULT_PROFILE["properties"]])

@@ -42,12 +42,11 @@ from zen.mods import mods2json#, MODS_NAMESPACE
 from zen.geo import geolookup
 from zen.whatfile import guess_imt
 from zen.feeds import webfeed
+from zen.exhibit import UNSUPPORTED_IN_EXHIBITKEY
 
 from . import __version__ as VERSION
 
 CHUNKCOUNT = 10
-
-UNSUPPORTED_IN_EXHIBITKEY = re.compile('\W')
 
 BIBTEX2MODS = module_config().get('bib2xml_command', 'bib2xml')
 DIAGNOSTICS = module_config().get('dataload_diagnostics', False)

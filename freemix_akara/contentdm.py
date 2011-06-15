@@ -92,7 +92,7 @@ def contentdm(collection='all', query=None, site=DEFAULT_SITE, limit=None):
     entries = list(results)
     logger.debug("Result count: {0}".format(len(entries)))
     properties = profile_properties(entries)
-    logger.debug("DEFAULT_PROPERTIES: {0}".format(DEFAULT_PROPERTIES))
+    #logger.debug("DEFAULT_PROPERTIES: {0}".format(DEFAULT_PROPERTIES))
     for prop in properties:
         if prop[u"property"] in DEFAULT_PROPERTIES:
             prop[u"tags"] = DEFAULT_PROPERTIES[prop[u"property"]][u"tags"]

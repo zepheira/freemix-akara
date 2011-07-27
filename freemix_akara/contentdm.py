@@ -40,7 +40,6 @@ import amara
 from amara import bindery
 from amara import tree
 from amara.thirdparty import json
-from amara.bindery.html import parse as htmlparse
 from amara.bindery.util import dispatcher, node_handler
 from amara.lib.iri import absolutize
 from amara.lib.util import first_item

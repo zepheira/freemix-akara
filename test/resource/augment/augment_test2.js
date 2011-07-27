@@ -1,10 +1,9 @@
 {
-    "__comment": "e.g.: curl --request POST --data-binary @- htp://transformer.zepheira.com:8883/augment.freemix.json < ~/dev/zepheira/freemix-akara/test/resource/augment/augment_test1.js",
+    "__comment": "curl --request POST --data-binary "@-" htp://transformer.zepheira.com:8883/augment.freemix.json < ~/dev/zepheira/freemix-akara/test/resource/augment/augment_test2.js",
     "items": [
         {
             "id": "_1",
             "label": "_1",
-            "street_address": "11400 Branch Court",
             "city": "Fredericksburg",
             "state": "VA",
             "zip": "22408",
@@ -16,7 +15,6 @@
         {
             "id": "_2",
             "label": "_2",
-            "street_address": "1600 Amphitheatre Parkway",
             "city": "Mountain View",
             "state": "VA",
             "zip": "94043",
@@ -26,7 +24,6 @@
         {
             "id": "_3",
             "label": "_3",
-            "street_address": "100 Health Park Drive",
             "city": "Louisville",
             "state": "CO",
             "zip": "80027-4545",
@@ -38,7 +35,6 @@
         {
             "id": "_4",
             "label": "_4",
-            "street_address": null,
             "city": null,
             "state": null,
             "zip": null,
@@ -46,19 +42,6 @@
             "end": "1910",
             "Name": "Old stuff",
             "comment": "YYYY date augmentations"
-        },
-        {
-            "id": "_5",
-            "label": "_5",
-            "street_address": "739 University Blvd",
-            "city": "Tuscaloosa",
-            "state": "Alabama",
-            "zip": "35487",
-            "placename": "Alabama",
-            "start": "2008-08-28",
-            "end": "2011-08-28",
-            "Name": "The University of Alabama",
-            "comment": "To test single placename geo augmentation"
         }
     ],
     "data_profile": {
@@ -76,12 +59,6 @@
             "property": "id",
              "enabled": true,
              "label": "id",
-             "tags": ["property:type=text"]
-        },
-        {
-            "property": "street_address",
-             "enabled": true,
-             "label": "Address",
              "tags": ["property:type=text"]
         },
         {
@@ -124,15 +101,6 @@
                 "city",
                 "state",
                 "zip"
-            ]
-        },
-        {
-            "property": "where3",
-            "enabled": true,
-            "label": "Where3",
-            "tags": ["property:type=location"],
-            "composite": [
-                "placename"
             ]
         },
         {

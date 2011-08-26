@@ -480,6 +480,6 @@ def revision():
     Sample queries:
     * curl http://localhost:8880/freemix.loader.revision
     '''
-    from zen.version import __version__
+    from zen import __version__
     return 'Freemix data loader ' + VERSION + ' | Zen version: ' + __version__
 

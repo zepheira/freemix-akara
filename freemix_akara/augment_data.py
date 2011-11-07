@@ -67,7 +67,7 @@ def post(body, sink):
 
 AUGMENTATIONS = {
     u'location': u'http://purl.org/com/zepheira/augmentation/location',
-    u'datetime': u'http://purl.org/com/zepheira/augmentation/datetime',
+    u'date': u'http://purl.org/com/zepheira/augmentation/datetime',
     u'luckygoogle': u'http://purl.org/com/zepheira/augmentation/luckygoogle',
     u'shredded_list': u'http://purl.org/com/zepheira/augmentation/shredded-list',
 }

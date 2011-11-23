@@ -148,17 +148,14 @@ PROFILE = {
             "enabled": True, 
             "label": "Date", 
             "tags": [
-                "property:type=datetime", "property:type=shredded_list"
+                "property:type=date", "property:type=shredded_list"
             ]
         }, 
         {
             "property": "datestamp", 
             "enabled": True, 
             "label": "Date stamp", 
-            "types": [
-                "datetime"
-            ], 
-            "tags": []
+            "tags": ["property:type=date"]
         }, 
         {
             "property": "title", 

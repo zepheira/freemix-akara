@@ -158,7 +158,7 @@
             "property": "when",
             "enabled": true,
             "label": "When",
-            "tags": ["property:type=datetime"],
+            "tags": ["property:type=date"],
             "composite": [
                 "start"
             ]
@@ -167,7 +167,7 @@
             "property": "when2",
             "enabled": true,
             "label": "When2",
-            "tags": ["property:type=datetime"],
+            "tags": ["property:type=date"],
             "composite": [
                 "end"
             ]

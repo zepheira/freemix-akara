@@ -167,6 +167,108 @@ PROFILE = {
             "tags": []
         }, 
         {
+            "property": "description", 
+            "enabled": True, 
+            "label": "Description", 
+            "types": [
+                "text"
+            ], 
+            "tags": []
+        }, 
+        {
+            "property": "subject", 
+            "enabled": True, 
+            "label": "Subject", 
+            "tags": [
+                "property:type=text", "property:type=shredded_list"
+            ]
+        }, 
+        {
+            "property": "contributor", 
+            "enabled": True, 
+            "label": "Contributor", 
+            "tags": [
+                "property:type=text", "property:type=shredded_list"
+            ]
+        }, 
+        {
+            "property": "publisher", 
+            "enabled": True, 
+            "label": "Publisher", 
+            "types": [
+                "text"
+            ], 
+            "tags": []
+        }, 
+        {
+            "property": "instructionalmethod", 
+            "enabled": True, 
+            "label": "Instructional Method", 
+            "types": [
+                "text"
+            ], 
+            "tags": []
+        }, 
+        {
+            "property": "accrualmethod", 
+            "enabled": True, 
+            "label": "Accrual Method", 
+            "types": [
+                "text"
+            ], 
+            "tags": []
+        }, 
+        {
+            "property": "source", 
+            "enabled": True, 
+            "label": "Source", 
+            "types": [
+                "text"
+            ], 
+            "tags": []
+        }, 
+        {
+            "property": "provenance", 
+            "enabled": True, 
+            "label": "Provenance", 
+            "tags": [
+                "property:type=text", "property:type=shredded_list"
+            ]
+        }, 
+        {
+            "property": "rights", 
+            "enabled": True, 
+            "label": "Rights", 
+            "tags": [
+                "property:type=text", "property:type=shredded_list"
+            ]
+        }, 
+        {
+            "property": "rightsholder", 
+            "enabled": True, 
+            "label": "Rights Holder", 
+            "types": [
+                "text"
+            ], 
+            "tags": []
+        }, 
+        {
+            "property": "coverage", 
+            "enabled": True, 
+            "label": "Coverage", 
+            "tags": [
+                "property:type=text", "property:type=shredded_list"
+            ]
+        }, 
+        {
+            "property": "audience", 
+            "enabled": True, 
+            "label": "Audience", 
+            "tags": [
+                "property:type=text", "property:type=shredded_list"
+            ]
+        }, 
+        {
             "property": "label", 
             "enabled": True, 
             "label": "Label", 
@@ -183,7 +285,7 @@ PROFILE = {
                 "text"
             ], 
             "tags": []
-        }, 
+        },
     ], 
     #"Akara_MIME_type_guess": "application/vnd.ms-excel"
 }

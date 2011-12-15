@@ -68,6 +68,7 @@ def listrecords(endpoint='http://dspace.mit.edu/oai/request', oaiset=None, limit
     remote = oaiservice(endpoint, logger)
     records = remote.list_records(oaiset)[:limit]
     exhibit_records = []
+    properties_used = set() # track the properties in use
     for rid, rinfo in records:
         erecord = {u'id': rid}
         for k, v in rinfo.iteritems():
@@ -77,11 +78,16 @@ def listrecords(endpoint='http://dspace.mit.edu/oai/request', oaiset=None, limit
                 erecord[k] = v
             if u'title' in erecord:
                 erecord[u'label'] = erecord[u'title']
+            properties_used.update(erecord.keys())
             exhibit_records.append(erecord)
+
+    PROFILE["properties"][:] = strip_unused_profile_properties(PROFILE["properties"],properties_used)
             
     #FIXME: This profile is NOT correct.  Dumb copy from CDM endpoint.  Please fix up below
     return json.dumps({'items': exhibit_records, 'data_profile': PROFILE}, indent=4)
 
+# Rebuild the data profile by removing optional, unused properties
+strip_unused_profile_properties = lambda prof_props, used: [ p for p in prof_props if p["property"] in used ]
 
 #FIXME: This profile is NOT correct.  Dumb copy from CDM endpoint.
 PROFILE = {

@@ -39,7 +39,7 @@ from zen import spreadsheet as spreadsheetlib
 from zen.temporal import smart_parse_date
 from zen.csvhelper import readcsv
 from zen.mods import mods2json#, MODS_NAMESPACE
-from zen.geo import geolookup
+from zenlib.akamod import geolookup_service
 from zen.whatfile import guess_imt
 from zen.feeds import webfeed
 from zen.exhibit import UNSUPPORTED_IN_EXHIBITKEY

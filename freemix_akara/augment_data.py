@@ -45,7 +45,8 @@ from akara import module_config
 
 from zen.services import service_proxy
 from zen import augmentation
-from zen.geo import local_geonames, US_STATE_FIRST
+from zen.akamod import geolookup_service
+#from zen.geo import local_geonames, US_STATE_FIRST
 
 
 GEONAMES_PLUS_DBFILE = module_config().get('geonames_dbfile')
@@ -72,7 +73,8 @@ AUGMENTATIONS = {
     u'shredded_list': u'http://purl.org/com/zepheira/augmentation/shredded-list',
 }
 
-augmentation.GEOCODER = local_geonames(GEONAMES_PLUS_DBFILE, heuristics=[US_STATE_FIRST], logger=logger)
+augmentation.GEOCODER = geolookup_service()
+#augmentation.GEOCODER = local_geonames(GEONAMES_PLUS_DBFILE, heuristics=[US_STATE_FIRST], logger=logger)
 
 PROP_TYPE_MARKER = "property:type="
 PROP_TYPE_MARKER_LEN = len("property:type=")

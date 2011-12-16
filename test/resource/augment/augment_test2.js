@@ -1,5 +1,5 @@
 {
-    "__comment": "curl --request POST --data-binary "@-" htp://transformer.zepheira.com:8883/augment.freemix.json < ~/dev/zepheira/freemix-akara/test/resource/augment/augment_test2.js",
+    "__comment": "e.g. curl --request POST --data-binary @- htp://transformer.zepheira.com:8883/augment.freemix.json < ~/dev/zepheira/freemix-akara/test/resource/augment/augment_test2.js",
     "items": [
         {
             "id": "_1",

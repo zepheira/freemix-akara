@@ -49,7 +49,7 @@ from akara import logger
 from akara import module_config
 from akara.util import find_peer_service
 
-from zenlib.akamod import geolookup_service
+#from zen.akamod import geolookup_service
 from zen.contentdm import read_contentdm
 from zen.exhibit import profile_properties
 

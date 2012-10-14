@@ -78,8 +78,9 @@ def listrecords(endpoint='http://dspace.mit.edu/oai/request', oaiset=None, limit
                 erecord[k] = v
             if u'title' in erecord:
                 erecord[u'label'] = erecord[u'title']
-            properties_used.update(erecord.keys())
-            exhibit_records.append(erecord)
+
+        properties_used.update(erecord.keys())
+        exhibit_records.append(erecord)
 
     PROFILE["properties"][:] = strip_unused_profile_properties(PROFILE["properties"],properties_used)
             

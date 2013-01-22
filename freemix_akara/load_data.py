@@ -43,6 +43,7 @@ from zen.mods import mods2json#, MODS_NAMESPACE
 from zen.whatfile import guess_imt
 from zen.feeds import webfeed
 from zen.exhibit import UNSUPPORTED_IN_EXHIBITKEY
+from zen import ejsonify
 
 from . import __version__ as VERSION
 
@@ -299,15 +300,14 @@ def freemix(body, ctype, maxcount=None, diagnostics=None):
             data, diag_info = mods2json(body, diagnostics)
             imt = 'application/x-bibtex'
         else:
-            try:
-                obj = json.loads(body)
-                #obj = json.loads(body.decode('iso-8859-1').encode('utf-8'))
+            ejsonify_output = []
+            if ejsonify.is_json(body):
+                obj = ejsonify_output[0]
                 data = obj[u'items']
                 fixup_obj_labels = False
                 imt = BIBTEX_IMT[0]
-            except ValueError, e:
-                #print >> sys.stderr, e
-                #FIXME: how to deal with CSV charater sets?
+            else:
+                #FIXME: how to deal with CSV character sets?
                 data = readcsv(body)
 
     if maxcount:

@@ -59,6 +59,19 @@
             "end": "2011-08-28",
             "Name": "The University of Alabama",
             "comment": "To test single placename geo augmentation"
+        },
+        {
+            "id": "_6",
+            "label": "_6",
+            "street_address": "10709 Gunston Road",
+            "city": "Lorton",
+            "state": "Virginia",
+            "zip": "22079-3901",
+            "placename": "Gunston Hall, Virginia, United States",
+            "start": "1725",
+            "end": "1792",
+            "Name": "Gunston Hall, Home of George Mason",
+            "comment": "Was giving Trevor problem, only works with fuzzy geosearch"
         }
     ],
     "data_profile": {

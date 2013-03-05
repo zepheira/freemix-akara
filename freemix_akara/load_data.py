@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # encoding: utf-8
 """
-Copyright 2008-2009 Zepheira LLC
+Copyright 2008-2013 Zepheira LLC
 
 Requires httplib2 Python module and bibutils
 
@@ -92,6 +92,9 @@ def guess_imt_(body, ctype):
 
 
 def post(body, sink):
+    '''
+    Helper function to post a chunk of JSON to a given endpoint (the sink)
+    '''
     headers = {'Content-type' : 'application/json'}
     h = httplib2.Http()
     resp, content = h.request(sink, "POST", body=body, headers=headers)
@@ -100,6 +103,9 @@ def post(body, sink):
 
 #dataprofile & objkeys mutated in place
 def prepare_chunk(chunk, dataprofile, objkeys, augmented_properties):
+    '''
+    Take a very simple Exhibit JSON-like array such as we get from most of the data modules and fix it up to be fully eJSON compliant
+    '''
     #logger.debug('CHUNK: ' + repr(chunk))
     newkeys = dict([ (k, k) for obj in chunk for k in obj if k not in objkeys ])
     if not objkeys:
@@ -358,66 +364,47 @@ def freemix(body, ctype, maxcount=None, diagnostics=None):
     return result
 
 
-#
-SERVICE_ID = 'http://purl.org/akara/services/builtin/atom.augmented.json'
-@simple_service('GET', SERVICE_ID, 'akara.augmented.json', 'application/json')
-def atom_augmented_json(url=None):
+SERVICE_ID = 'http://purl.org/com/zepheira/services/json.nav.prep.json'
+@simple_service('POST', SERVICE_ID, 'json.nav.prep', 'application/json')
+def json_nav_prep(body, ctype):
     '''
-    Convert Atom syntax to Exhibit JSON, with some augmentation requested by James Leigh
+    Read and analyze a JSON file to support the UI for having the user
+    navigate and select an array for extract (see load_extract)
 
-    Sample request:
-    * curl "http://localhost:8880/akara.augmented.json?url=http://picasaweb.google.com/data/feed/base/user/dysryi/albumid/5342439351589940049"
+    Sample queries:
+    * curl --request POST --data-binary @- http://localhost:8880/json.nav.prep.json < test/data/load/somefeed.json
     '''
-    url = url[0]
-    feed, entries = atomparse(url)
-    for e in entries:
-        e[u'feed_title'] = feed[u'title']
-        e[u'label'] = e[u'title']
-        if u'content_src' in e:
-            e[u'depiction'] = e[u'content_src']
-        if u'link' in e:
-            e[u'url'] = e[u'link']
-    return json.dumps({'items': entries}, indent=4)
+    ejsonify_output = []
+    if ejsonify.is_json(body, ejsonify_output):
+        obj = ejsonify_output[0]
+        result = ejsonify.analyze_for_nav(obj)
+        result = json.dumps(result, indent=4)
+        return result
+    else:
+        raise ValueError('Unable to process content')
 
 
-#
-SERVICE_ID = 'http://purl.org/akara/services/builtin/picasa.proxy.atom'
-@simple_service('GET', SERVICE_ID, 'picasa.proxy.atom', 'application/atom+xml')
-def picasa_proxy_atom(path=None):
+SERVICE_ID = 'http://purl.org/com/zepheira/services/load.extract.json'
+@simple_service('POST', SERVICE_ID, 'load.extract.json', 'application/json')
+def load_extract(body, ctype):
     '''
-    Proxy for PicasaWeb requests, requested by James Leigh
+    Read two JSON files merged with a LINEFEED, and use the specification
+    to extract an array from the JSON source
 
-    "picasaweb doesn't like it if your request contains a Referer header"
-    "This means we can't use picasaweb images as img/@src"
-
-    Sample request:
-    * curl "http://localhost:8880/picasa.proxy.atom?path=data/feed/base/user/dysryi/albumid/5342439351589940049"
+    Sample queries:
+    * curl --request POST --data-binary @- http://localhost:8880/load.extract.json < test/data/load/json_plus_spec.dat
     '''
-    path = path[0]
-    PICASABASE = 'http://picasaweb.google.com/'
-    return urllib.urlopen(PICASABASE + path).read()
-
-
-SCRAPER_SERVICES = module_config().get('scraper_services', '').split()
-#
-#javascript:location.href = 'http://192.168.1.69:8880/z.scraper.json?url=' + encodeURIComponent(location.href)
-SERVICE_ID = 'http://purl.org/akara/services/builtin/z.scraper.json'
-@simple_service('GET', SERVICE_ID, 'z.scraper.json', 'application/json')
-def scraper_json(url=None):
-    '''
-    End-point for bookmarklet that scrapes a site for RDFa then using Calais
-
-    Sample request:
-    * curl "http://localhost:8880/z.scraper.json?url=http://zepheira.com"
-    '''
-    for s in SCRAPER_SERVICES:
-        logger.debug("Not found: " + place)
-        #print >> sys.stderr, 'Trying:', s%{'url': url[0]}
-        #result = urllib.urlopen(s%{'url': url[0]}).read()
-        result = urllib.urlopen(s + url[0]).read()
-        if result:
+    file1, file2 = body.split('\f')
+    file1_parsed = []
+    if ejsonify.is_json(file1, file1_parsed):
+        file1_parsed = file1_parsed[0]
+        file2_parsed = []
+        if ejsonify.is_json(file2, file2_parsed):
+            file2_parsed = file2_parsed[0]
+            result = ejsonify.pull_ejson_by_patterns(file1_parsed, file2_parsed)
+            result = json.dumps(result, indent=4)
             return result
-    return '{}'
+    raise ValueError('Unable to process content')
 
 
 SEARCH_AREA_SIZE = 10

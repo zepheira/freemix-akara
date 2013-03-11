@@ -24,7 +24,8 @@
       "dpla.dataset_id": "npr_org_1312156800",
       "dpla.language": "English",
       "dpla.contributor": "npr_org",
-      "dpla.contributor_record_id": "2636"
+      "dpla.contributor_record_id": "2636",
+      "dpla.bogon": "spam"
     },
     {
       "dpla.date": "2007",

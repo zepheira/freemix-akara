@@ -399,8 +399,11 @@ def load_extract(body, ctype):
     if ejsonify.is_json(file1, file1_parsed):
         file1_parsed = file1_parsed[0]
         file2_parsed = []
-        if ejsonify.is_json(file2, file2_parsed):
-            file2_parsed = file2_parsed[0]
+        if not file2 or ejsonify.is_json(file2, file2_parsed):
+            if file2:
+                file2_parsed = file2_parsed[0]
+            else:
+                file2_parsed = None
             result = ejsonify.pull_ejson_by_patterns(file1_parsed, file2_parsed)
             result = json.dumps(result, indent=4)
             return result

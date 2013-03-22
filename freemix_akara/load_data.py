@@ -318,6 +318,9 @@ def freemix(body, ctype, maxcount=None, diagnostics=None):
 
     if maxcount:
         data = data[:int(maxcount)]
+
+    #FIXME: Following redundant now that we have add_ejson_profile
+    #Keeping it to avoid breaking what's working for now
     objkeys = dict([ (k, k) for obj in data for k in obj ])
     #FIXME: reduce from 3 full passes through obj to 2 (don't think we can go lower than 2)
     for k in objkeys:
@@ -364,6 +367,39 @@ def freemix(body, ctype, maxcount=None, diagnostics=None):
     return result
 
 
+def add_ejson_profile(data, fixup_obj_labels=True):
+    objkeys = dict([ (k, k) for obj in data for k in obj ])
+    #FIXME: reduce from 3 full passes through obj to 2 (don't think we can go lower than 2)
+    for k in objkeys:
+        kcount = reduce(lambda count, obj, k=k: count + int(k in obj), data, 0)
+        logger.debug("Key usage count %s: %i" % (k, kcount))
+        if not kcount:
+            del objkeys[k]
+    logger.debug("Modified data profile keys: " + repr(objkeys))
+    if fixup_obj_labels:
+        for obj in data:
+            for k in obj:
+                #Yes we could receive non-string "labels"
+                if not isinstance(k, basestring):
+                    k = str(k)
+                new_k = UNSUPPORTED_IN_EXHIBITKEY.sub('_', k)
+                if not new_k or new_k[0].isdigit():
+                    new_k = '_' + new_k
+                if k != new_k:
+                    objkeys[new_k] = k
+                    try:
+                        del objkeys[k]
+                    except KeyError:
+                        pass
+                    obj[new_k] = obj[k]
+                    del obj[k]
+    #print >> sys.stderr, objkeys
+
+    return {"properties": [
+                {"property": k, "enabled": (k not in ("id", "label")), "label": v, "types": ["text"]} for k, v in objkeys.iteritems()
+            ]}
+
+
 SERVICE_ID = 'http://purl.org/com/zepheira/services/json.nav.prep.json'
 @simple_service('POST', SERVICE_ID, 'json.nav.prep', 'application/json')
 def json_nav_prep(body, ctype):
@@ -405,7 +441,9 @@ def load_extract(body, ctype):
             else:
                 file2_parsed = None
             result = ejsonify.pull_ejson_by_patterns(file1_parsed, file2_parsed)
-            result = json.dumps(result, indent=4)
+            items = result[u'items']
+            profile = add_ejson_profile(items)
+            result = json.dumps({'items': items, 'data_profile': profile}, indent=4)
             return result
     raise ValueError('Unable to process content')
 

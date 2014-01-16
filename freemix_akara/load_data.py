@@ -307,11 +307,11 @@ def freemix(body, ctype, maxcount=None, diagnostics=None):
             imt = 'application/x-bibtex'
         else:
             ejsonify_output = []
-            if ejsonify.is_json(body):
+            if ejsonify.is_json(body, ejsonify_output):
                 obj = ejsonify_output[0]
                 data = obj[u'items']
                 fixup_obj_labels = False
-                imt = BIBTEX_IMT[0]
+                imt = 'application/json'
             else:
                 #FIXME: how to deal with CSV character sets?
                 data = readcsv(body)

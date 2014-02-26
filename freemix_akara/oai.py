@@ -40,7 +40,7 @@ from zen.oai import oaiservice
 LISTSETS_SERVICE_ID = 'http://purl.org/com/zepheira/freemix/services/oai/listsets'
 
 @simple_service('GET', LISTSETS_SERVICE_ID, 'oai.listsets.json', 'application/json')
-def listsets(endpoint='http://dspace.mit.edu/oai/request', limit=100):
+def listsets(endpoint='http://dspace.mit.edu/oai/request', limit=5000):
     """
     e.g.:
 
@@ -55,7 +55,7 @@ def listsets(endpoint='http://dspace.mit.edu/oai/request', limit=100):
 LISTRECORDS_SERVICE_ID = 'http://purl.org/com/zepheira/freemix/services/oai/listrecords'
 
 @simple_service('GET', LISTRECORDS_SERVICE_ID, 'oai.listrecords.json', 'application/json')
-def listrecords(endpoint='http://dspace.mit.edu/oai/request', oaiset=None, limit=100):
+def listrecords(endpoint='http://dspace.mit.edu/oai/request', oaiset=None, limit=5000):
     """
     e.g.:
 

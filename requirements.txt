@@ -5,6 +5,6 @@ simplejson
 feedparser
 xlrd
 
-zen
-akara
-amara
+git+http://github.com/zepheira/zenpub#egg=zen
+git+http://github.com/zepheira/akara.git#egg=akara
+git+http://github.com/zepheira/amara.git#egg=amara
